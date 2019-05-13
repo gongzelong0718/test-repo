@@ -1,4 +1,4 @@
-package com.example.admin.gongzelong;
+package com.example.admin.gongzelong.permission;
 
 import android.app.Activity;
 import android.content.ComponentName;
@@ -14,6 +14,8 @@ import android.support.v4.app.AppOpsManagerCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
+
+import com.example.admin.gongzelong.DeviceUtils;
 
 
 /**

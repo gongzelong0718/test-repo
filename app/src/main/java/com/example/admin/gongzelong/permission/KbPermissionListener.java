@@ -1,4 +1,4 @@
-package com.example.admin.gongzelong;
+package com.example.admin.gongzelong.permission;
 
 /**
  * Description：

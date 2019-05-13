@@ -10,6 +10,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.admin.gongzelong.permission.KbPermission;
+import com.example.admin.gongzelong.permission.KbPermissionListener;
+import com.example.admin.gongzelong.permission.KbPermissionUtils;
+
 import java.io.File;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {

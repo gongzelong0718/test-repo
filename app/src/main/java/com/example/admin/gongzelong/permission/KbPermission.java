@@ -1,4 +1,4 @@
-package com.example.admin.gongzelong;
+package com.example.admin.gongzelong.permission;
 
 import android.app.Activity;
 import android.content.pm.PackageManager;
