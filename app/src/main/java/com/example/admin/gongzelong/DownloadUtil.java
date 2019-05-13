@@ -35,10 +35,10 @@ public class DownloadUtil {
     }
 
     public void downloadFile(String url, final DownloadListener downloadListener) {
-        //通过Url得到保存到本地的文件名
+        //get the name
         String name = url;
         if (FileUtils.createOrExistsDir(PATH_DOWNLOAD)) {
-            int i = name.lastIndexOf('/');//一定是找最后一个'/'出现的位置
+            int i = name.lastIndexOf('/');//get the file name
             if (i != -1) {
                 name = name.substring(i);
                 mFilePath = PATH_DOWNLOAD +
@@ -46,26 +46,26 @@ public class DownloadUtil {
             }
         }
         if (TextUtils.isEmpty(mFilePath)) {
-            Log.e(TAG, "download: 存储路径为空了");
+            Log.e(TAG, "download: saving path is null");
             return;
         }
         //建立一个文件
         mFile = new File(mFilePath);
-//        if (!FileUtils.isFileExists(mFile) && FileUtils.createOrExistsFile(mFile)) {
+        if (!FileUtils.isFileExists(mFile) && FileUtils.createOrExistsFile(mFile)) {
             if (mApi == null) {
-                Log.e(TAG, "download: 下载接口为空了");
+                Log.e(TAG, "download: downloading api is null");
                 return;
             }
             mCall = mApi.downloadFile(url);
             mCall.enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(@NonNull Call<ResponseBody> call, @NonNull final Response<ResponseBody> response) {
-                    //下载文件放在子线程
+                    //child thread
                     mThread = new Thread() {
                         @Override
                         public void run() {
                             super.run();
-                            //保存到本地
+                            //save to the local
                             Log.i(TAG, "starting download");
                             writeFile2Disk(response, mFile, downloadListener);
                         }
@@ -78,9 +78,9 @@ public class DownloadUtil {
                     downloadListener.onFailure("Network error");
                 }
             });
-//        } else {
-//            downloadListener.onFinish(mFilePath);
-//        }
+        } else {
+            downloadListener.onFinish(mFilePath);
+        }
     }
 
     private void writeFile2Disk(Response<ResponseBody> response, File file, DownloadListener downloadListener) {
@@ -89,7 +89,7 @@ public class DownloadUtil {
         OutputStream os = null;
 
         if (response.body() == null) {
-            downloadListener.onFailure("资源错误！");
+            downloadListener.onFailure("resource error！");
             return;
         }
         InputStream is = response.body().byteStream();
@@ -102,17 +102,17 @@ public class DownloadUtil {
             while ((len = is.read(buff)) != -1) {
                 os.write(buff, 0, len);
                 currentLength += len;
-                Log.e(TAG, "当前进度: " + currentLength);
+                Log.e(TAG, "Current progress: " + currentLength);
                 downloadListener.onProgress((int) (100 * currentLength / totalLength));
                 if ((int) (100 * currentLength / totalLength) == 100) {
                     downloadListener.onFinish(mFilePath);
                 }
             }
         } catch (FileNotFoundException e) {
-            downloadListener.onFailure("未找到文件！");
+            downloadListener.onFailure("file not found！");
             e.printStackTrace();
         } catch (IOException e) {
-            downloadListener.onFailure("IO错误！");
+            downloadListener.onFailure("IO error！");
             e.printStackTrace();
         } finally {
             if (os != null) {

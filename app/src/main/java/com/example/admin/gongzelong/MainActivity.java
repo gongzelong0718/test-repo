@@ -18,11 +18,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final int COMPRESS_FINISH = 3;
     private static final int COMPRESS_FAILURE = 4;
 
-//    public static String URL = "http://www.baidu.com/s?wd=%E4%BB%8A%E6%97%A5%E6%96%B0%E9%B2%9C%E4%" +
-//            "BA%8B&tn=SE_PclogoS_8whnvm25&sa=ire_dl_gh_logo&rsv_dl=igh_logo_pcs";
-
-    public static String URL = "http://small-bronze.oss-cn-shanghai.aliyuncs.com/\" +\n" +
-            "            \"image/video/cover/2018/3/8/8BBC6C00DF78476C98AD9CA482DEF635.jpg";
+    public static String URL = "http://ipv4.download.thinkbroadband.com/50MB.zip";
 
     private static final String TAG = "MainActivity";
 
